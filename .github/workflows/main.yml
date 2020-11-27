@@ -2,10 +2,20 @@ name: A workflow for my Hello World file
 on: push
 jobs:
   build:
-    name: Hello world action
+    - name: Hello world action
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: ./action-a
         with:
           MY_NAME: "Ivo"
+    - name: try secrets
+      with: # Set the secret as an input
+        super_secret: ${{ secrets.MY_SECRET }}
+      env: # Or as an environment variable
+        super_secret: ${{ secrets.MY_SECRET }}
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.MY_SECRET }}
+      run: |
+        echo MY_SECRET "$SUPER_SECRET"

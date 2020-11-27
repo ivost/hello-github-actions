@@ -49,6 +49,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: ./action-a
 
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
